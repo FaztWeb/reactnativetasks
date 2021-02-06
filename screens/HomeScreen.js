@@ -37,9 +37,9 @@ const HomeScreen = (props) => {
         renderItem={(task) => (
           <TouchableOpacity
             onPress={() =>
-              props.navigation.navigate('ModifyTaskScreen', {id: task.id})
+              props.navigation.navigate('ModifyTaskScreen', {id: task.item.id})
             }>
-            <TaskContent task={{...task}} />
+            <TaskContent task={{...task.item}} />
           </TouchableOpacity>
         )}
       />

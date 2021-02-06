@@ -1,16 +1,17 @@
 import React from 'react';
 import {Card, CardItem, Body, H3, Text} from 'native-base';
 
-const TaskContent = ({task}) => {
+const TaskContent = (props) => {
+  const {task} = props;
   return (
     <Card>
       <CardItem>
         <Body>
           <H3>{task.title}</H3>
           <Text>
-            {task.content.length > 120
-              ? `${task.content.substr(0, 120)}...`
-              : task.content}
+            {task.description.length > 120
+              ? `${task.description.substr(0, 120)}...`
+              : task.description}
           </Text>
         </Body>
       </CardItem>
