@@ -1,10 +1,10 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {Text, FlatList, TouchableOpacity} from 'react-native';
+import {Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
 import {Button} from 'native-base';
 import {Layout} from '../components/Layout';
-import TaskContent from '../components/TaskContent';
+import TaskItem from '../components/TaskItem';
 import {TaskContext} from '../contexts/TaskContext';
 
 const HomeScreen = (props) => {
@@ -20,18 +20,21 @@ const HomeScreen = (props) => {
       }
     };
     getData();
-    console.log('llamo');
   }, [getContextTasks, isFocused]);
 
   return (
     <Layout
       title="My Tasks"
       footer={
-        <Button full onPress={() => props.navigation.navigate('AddTaskScreen')}>
-          <Text>Add Task</Text>
+        <Button
+          style={styles.button}
+          full
+          onPress={() => props.navigation.navigate('AddTaskScreen')}>
+          <Text style={styles.text}>Add Task</Text>
         </Button>
       }>
       <FlatList
+        style={styles.list}
         data={tasks}
         keyExtractor={(task) => task.id}
         renderItem={(task) => (
@@ -39,12 +42,24 @@ const HomeScreen = (props) => {
             onPress={() =>
               props.navigation.navigate('ModifyTaskScreen', {id: task.item.id})
             }>
-            <TaskContent task={{...task.item}} />
+            <TaskItem task={{...task.item}} />
           </TouchableOpacity>
         )}
       />
     </Layout>
   );
 };
+
+const styles = StyleSheet.create({
+  list: {
+    padding: 5,
+  },
+  text: {
+    color: '#ffffff',
+  },
+  button: {
+    backgroundColor: '#5f27cd',
+  },
+});
 
 export default HomeScreen;

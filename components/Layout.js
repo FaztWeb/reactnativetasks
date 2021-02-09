@@ -1,4 +1,5 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import {
   Container,
   Header,
@@ -9,19 +10,35 @@ import {
   Body,
   Title,
 } from 'native-base';
+import PropTypes from 'prop-types';
 
-export const Layout = (props) => (
+export const Layout = ({left, right, title, footer, children}) => (
   <Container>
-    <Header>
-      <Left>{props.left}</Left>
+    <Header style={styles.Header}>
+      {left && <Left>{left}</Left>}
       <Body>
-        <Title>{props.title}</Title>
+        <Title>{title}</Title>
       </Body>
-      <Right>{props.right}</Right>
+      {right && <Right>{right}</Right>}
     </Header>
-    {props.children}
+    {children}
     <Footer>
-      <FooterTab>{props.footer}</FooterTab>
+      <FooterTab>{footer}</FooterTab>
     </Footer>
   </Container>
 );
+
+Layout.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  left: PropTypes.node,
+  right: PropTypes.node,
+  footer: PropTypes.node,
+};
+
+const styles = StyleSheet.create({
+  Header: {
+    marginLeft: 10,
+    backgroundColor: '#5f27cd',
+  },
+});

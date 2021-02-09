@@ -44,14 +44,17 @@ const ModifyTaskScreen = (props) => {
       title="Modify Task"
       footer={
         <>
-          <Button full onPress={() => props.navigation.navigate('HomeScreen')}>
-            <Text>Cancel</Text>
+          <Button
+            full
+            onPress={() => props.navigation.navigate('HomeScreen')}
+            style={styles.button}>
+            <Text style={styles.text}>Cancel</Text>
           </Button>
-          <Button full onPress={updateTask}>
-            <Text>Update Task</Text>
+          <Button full onPress={updateTask} style={styles.button}>
+            <Text style={styles.text}>Update Task</Text>
           </Button>
-          <Button full onPress={deleteTask}>
-            <Text>Delete Task</Text>
+          <Button full onPress={deleteTask} style={styles.button}>
+            <Text style={styles.text}>Delete Task</Text>
           </Button>
         </>
       }>
@@ -59,6 +62,7 @@ const ModifyTaskScreen = (props) => {
         <Item>
           <Label>Title: </Label>
           <Input
+            bordered
             value={task.title}
             onChangeText={(value) => handleChange('title', value)}
           />
@@ -78,6 +82,12 @@ const ModifyTaskScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  button: {
+    backgroundColor: '#5f27cd',
+  },
+  text: {
+    color: '#ffffff',
   },
 });
 

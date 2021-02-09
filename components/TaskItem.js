@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardItem, Body, H3, Text} from 'native-base';
 
-const TaskContent = (props) => {
+const TaskItem = (props) => {
   const {task} = props;
   return (
     <Card>
@@ -19,4 +19,4 @@ const TaskContent = (props) => {
   );
 };
 
-export default TaskContent;
+export default TaskItem;
