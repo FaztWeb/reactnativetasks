@@ -1,6 +1,5 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
-import {useIsFocused} from '@react-navigation/native';
 
 import {Button} from 'native-base';
 import {Layout} from '../components/Layout';
@@ -8,19 +7,14 @@ import TaskItem from '../components/TaskItem';
 import {TaskContext} from '../contexts/TaskContext';
 
 const HomeScreen = (props) => {
-  const {getContextTasks} = useContext(TaskContext);
-  const [tasks, setTasks] = useState([]);
-  const isFocused = useIsFocused();
+  const {getContextTasks, contextTasks} = useContext(TaskContext);
 
   useEffect(() => {
     const getData = async () => {
-      if (isFocused) {
-        const contextTasks = await getContextTasks();
-        setTasks(contextTasks);
-      }
+      await getContextTasks();
     };
     getData();
-  }, [getContextTasks, isFocused]);
+  }, []);
 
   return (
     <Layout
@@ -35,7 +29,7 @@ const HomeScreen = (props) => {
       }>
       <FlatList
         style={styles.list}
-        data={tasks}
+        data={contextTasks}
         keyExtractor={(task) => task.id}
         renderItem={(task) => (
           <TouchableOpacity
